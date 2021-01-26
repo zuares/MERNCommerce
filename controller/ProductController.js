@@ -44,7 +44,6 @@ const ProductController = {
         try {
             const features = new APIfeatures(Product.find(), req.query).filtering().sorting();
             const items = await features.query
-            console.log(items);
             return res.json({ status: "success", items: items.length, item: items });
         } catch (err) {
             return res.status(500).json({ error: err.message });

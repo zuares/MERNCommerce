@@ -9,7 +9,7 @@ function DetailProduct() {
     const { products } = state.productsAPI.products;
 
     const [detailProduct, setDetailProduct] = useState([]);
-    console.log(detailProduct);
+
     useEffect(() => {
         if (param) {
             products.map(product => {
@@ -19,6 +19,7 @@ function DetailProduct() {
             })
         }
     }, [param, products]);
+
     if (detailProduct.length === 0) return null;
     return (
         <div className={`container py-8`} >

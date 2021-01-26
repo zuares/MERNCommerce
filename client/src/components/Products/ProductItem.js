@@ -15,8 +15,8 @@ function ProductItem({ product }) {
                     <p>{description}</p>
                 </div>
                 <div className={`flex gap-2 font-bold mt-4`} >
-                    <Link className={`bg-green-600 text-white w-1/2 text-center py-2 inline-block `} >Buy</Link>
-                    <Link className={`bg-gray-600 text-white w-1/2 text-center py-2 inline-block `} to={`/detail/${product._id}`} >View</Link>
+                    <Link to="/" className={`bg-green-600 text-white w-1/2 text-center py-2 inline-block `} >Buy</Link>
+                    <Link to="/" className={`bg-gray-600 text-white w-1/2 text-center py-2 inline-block `} to={`/detail/${product._id}`} >View</Link>
                 </div>
 
             </div>
