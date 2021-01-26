@@ -10,6 +10,7 @@ dotenv.config();
 const authRouter = require('./routes/authRouter');
 const categoryRouter = require('./routes/categoryRouter');
 const uploadRoutes = require('./routes/uploadRoutes');
+const productRouter = require('./routes/productRouter');
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.get('/', (req, res) => {
 app.use('/auth', authRouter);
 app.use('/api/category', categoryRouter);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/products', productRouter);
 
 const PORT = process.env.PORT;
 
