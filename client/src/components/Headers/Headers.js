@@ -1,7 +1,37 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { GlobalState } from '../../GlobalState';
 
 const Headers = () => {
+    const state = useContext(GlobalState);
+    const [isLogged, setLogged] = state.userAPI.isLogged;
+    const [isAdmin, setAdmin] = state.userAPI.isAdmin;
+
+    const logoutUser = async e => {
+        e.preventDefault();
+        await axios.post('/auth/logout');
+        localStorage.clear('firstLogin');
+        setLogged(false);
+        setAdmin(false);
+    }
+    const adminRouter = () => {
+        return (
+            <>
+                <li><Link to="/create_product" >Create Product</Link></li>
+                <li><Link to="/category" >Categories</Link></li>
+            </>
+        )
+    }
+    const loggedRouter = () => {
+        return (
+            <>
+                <li><Link to="/history" >History</Link></li>
+                <li><Link to="/logout" onClick={logoutUser}  >Logout</Link></li>
+            </>
+        )
+    }
+
     return (
         <header className={` bg-gray-100 text-lg`} >
             <div className={`container  flex items-center h-20  justify-between`} >
@@ -13,7 +43,7 @@ const Headers = () => {
                 {/* Logo */}
                 <div className={`font-bold`} >
                     <Link to="/">
-                        ZDev
+                        {isAdmin ? `Is Admin` : `ZDev`}
                     </Link>
                 </div>
 
@@ -21,14 +51,18 @@ const Headers = () => {
 
                     <ul className={`flex space-x-6 `} >
                         <li>
-                            <Link to="/" >Products</Link>
+                            <Link to="/" >{isAdmin ? `Shop` : `Products`}</Link>
                         </li>
-                        <li>
-                            <Link to="/login" >Login</Link>
-                        </li>
-                        <li>
-                            <Link to="/register" >Register</Link>
-                        </li>
+
+                        {
+                            isAdmin && adminRouter()
+                        }
+
+                        {
+                            isLogged ? loggedRouter() : <li>
+                                <Link to="/login" >Login or Register</Link>
+                            </li>
+                        }
 
                     </ul>
 
