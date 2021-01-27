@@ -10,5 +10,6 @@ router.post('/login', AuthController.login);
 router.post('/logout', AuthController.logout);
 router.get('/refresh_token', AuthController.refreshToken);
 router.get('/info', auth, AuthController.getUser);
+router.patch('/addCart', auth, AuthController.addCart);
 
 module.exports = router;

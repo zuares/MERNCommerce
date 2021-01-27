@@ -77,10 +77,22 @@ const AuthController = {
         } catch (err) {
             return res.status(500).json({ er: err.message });
         }
+    },
+
+    addCart: async (req, res) => {
+        try {
+            const user = await User.findById(req.user.id);
+            if (!user) return res.status(400).json({ message: `User doesnt exists` });
+            await User.findByIdAndUpdate({ _id: req.user.id }, {
+                cart: req.body.cart
+            });
+            return res.json({ message: `Added to cart` });
+        } catch (err) {
+            return res.status(500).json({ error: err.message });
+        }
     }
 
 }
-
 
 const createAccessToken = (user) => {
     return jwt.sign(user, process.env.ACCESS_TOKEN, { expiresIn: '1d' });

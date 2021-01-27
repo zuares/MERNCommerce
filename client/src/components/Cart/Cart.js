@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { GlobalState } from '../../GlobalState';
 import ButtonRender from '../Products/ButtonRender';
 
 function Cart() {
     const state = useContext(GlobalState);
     const [cart, setCart] = state.userAPI.cart;
-    console.log(cart);
+    const [total, setTotal] = useState(0);
 
     if (cart.length === 0) {
         return (
@@ -48,12 +48,18 @@ function Cart() {
                                         <input type="text" className={`w-8 h-8 border text-center text-black `} value={1} />
                                         <button className={`w-8 py-0.5 bg-green-500`} >+</button>
                                     </div>
+                                    <div>
+                                        <button className={`w-8 py-2 bg-red-300`} >Delete</button>
+                                    </div>
 
                                 </div>
                             </div>
                         )
                     })
                 }
+                <div>
+                    Total : $ {total}
+                </div>
             </div>
         </div>
 

@@ -12,6 +12,7 @@ const DataProvider = ({ children }) => {
         productsAPI: ProductsAPI(),
         userAPI: UserAPI(token)
     }
+
     const refreshToken = async () => {
         const token = await axios.get('auth/refresh_token');
 
